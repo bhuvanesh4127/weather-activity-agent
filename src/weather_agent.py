@@ -29,12 +29,32 @@ def main():
     print("     WEATHER-BASED ACTIVITY AGENT")
     print("====================================")
 
-    temperature = float(input("Enter temperature (°C): "))
-    weather = input("Enter weather condition: ")
-    wind = input("Enter wind level (low/moderate/high): ")
+    try:
+        temperature_input = input("Enter temperature (°C): ").strip()
 
-    print("\nAgent Decision:")
-    print(recommend_activity(temperature, weather, wind))
+        if not temperature_input:
+            print("Missing temperature data. Please enter a valid temperature.")
+            return
+
+        temperature = float(temperature_input)
+
+        weather = input("Enter weather condition: ").strip()
+
+        if not weather:
+            print("Missing weather data. Please enter a weather condition.")
+            return
+
+        wind = input("Enter wind level (low/moderate/high): ").strip().lower()
+
+        if wind not in ["low", "moderate", "high"]:
+            print("Invalid wind level. Please enter low, moderate, or high.")
+            return
+
+        print("\nAgent Decision:")
+        print(recommend_activity(temperature, weather, wind))
+
+    except ValueError:
+        print("Invalid temperature. Please enter a number.")
 
 
 if __name__ == "__main__":
